@@ -59,7 +59,18 @@ namespace EjerciciosDeFunciones
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            int numero = int.Parse(this.txtNumero.Text);
+            bool esNumeroCorrecto = int.TryParse(this.txtNumero.Text, out int numero);
+            if (!esNumeroCorrecto)
+            {
+                MessageBox.Show("Debe de ingresar un valor numerico.....");
+                return;
+            }
+            if (!(numero > 0 && numero <= 255))
+            {
+                MessageBox.Show("Numero fuera de rango....");
+                return;
+            }
+
             int[] res = binario(numero);
             Console.WriteLine("Inicio");
             for (int i=res.Length-1; i>0; i--)
@@ -148,6 +159,26 @@ namespace EjerciciosDeFunciones
                 //Console.WriteLine("{0}", resto);
             }
             return bin;
+        }
+
+        private void btnBinDec_Click(object sender, EventArgs e)
+        {
+            int num = 0;
+            if (Control1.Checked) num += 1;
+            if (Control2.Checked) num += 2;
+            if (Control3.Checked) num += 3;
+            if (Control4.Checked) num += 4;
+            if (Control5.Checked) num += 5;
+            if (Control6.Checked) num += 6;
+            if (Control7.Checked) num += 7;
+            if (Control8.Checked) num += 8;
+            this.txtNumero.Text = num.ToString();
+
+        }
+
+        private void Control1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
